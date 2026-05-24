@@ -1,10 +1,10 @@
-FROM php:8.2-apache
+FROM php:8.2-cli
 
-RUN apt-get update && apt-get install -y \
-    && docker-php-ext-install mysqli pdo pdo_mysql
+RUN docker-php-ext-install mysqli pdo pdo_mysql
 
-RUN a2dismod mpm_event && a2enmod mpm_prefork
+WORKDIR /var/www/html
+COPY . .
 
-COPY . /var/www/html/
+EXPOSE 80
 
-RUN chown -R www-data:www-data /var/www/html
+CMD ["php", "-S", "0.0.0.0:80"]
