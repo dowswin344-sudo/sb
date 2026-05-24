@@ -16,11 +16,11 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// ParamÃ¨tres de connexion Ã  la base de donnÃ©es
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'sbeeconnect');
+// Paramètres de connexion à la base de données
+define('DB_HOST', 'mysql.railway.internal');
+define('DB_NAME', 'railway');
 define('DB_USER', 'root');
-define('DB_PASS', '');
+define('DB_PASS', 'PFZjpjWjjEDUUYPNYkmfznOXKFBlFgWU');
 define('DB_CHARSET', 'utf8mb4');
 
 // Connexion PDO avec gestion d'erreurs
@@ -41,33 +41,38 @@ try {
 
 // Fonctions utilitaires globales (protÃ©gÃ©es contre les redÃ©finitions)
 if (!function_exists('hacher_mot_de_passe')) {
-    function hacher_mot_de_passe($mdp) {
+    function hacher_mot_de_passe($mdp)
+    {
         return hash('sha256', $mdp);
     }
 }
 
 if (!function_exists('generer_reference')) {
-    function generer_reference() {
+    function generer_reference()
+    {
         return 'REF-' . date('Ymd') . '-' . rand(1000, 9999);
     }
 }
 
 if (!function_exists('envoyer_sms')) {
-    function envoyer_sms($telephone, $message) {
+    function envoyer_sms($telephone, $message)
+    {
         // Simulation (Ã  remplacer par une vraie API SMS)
         return true;
     }
 }
 
 if (!function_exists('envoyer_email')) {
-    function envoyer_email($destinataire, $sujet, $corps) {
+    function envoyer_email($destinataire, $sujet, $corps)
+    {
         // Simulation (Ã  remplacer par PHPMailer ou mail())
         return true;
     }
 }
 
 if (!function_exists('time_elapsed_string')) {
-    function time_elapsed_string($datetime) {
+    function time_elapsed_string($datetime)
+    {
         $now = new DateTime();
         $ago = new DateTime($datetime);
         $diff = $now->diff($ago);
